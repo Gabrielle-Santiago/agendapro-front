@@ -1,0 +1,148 @@
+<script lang="ts" setup>
+    import caduceus from '../assets/caduceus.png'
+    const links = [
+        {   text:"Contato", href:"#contact"},
+        {   text:"Test", href:"#contact"}
+    ]
+</script>
+
+<template>
+  <header class="header">
+    <nav class="navbar">
+      <div class="navbar-content">
+        
+        <div class="logo">
+          <div class="skeleton-avatar">
+            <img id="caduceus" :src="caduceus" alt="Logo AgendaPro">
+          </div>
+          <p class="brand-text">Agenda Pro</p>
+        </div>
+
+        <ul class="links">
+          <li class="value" v-for="link in links" :key="link.text">
+            <a class="link" :href="link.href">{{ link.text }}</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+</template>
+
+
+<style>
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #1E3953;
+  z-index: 1000;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: white;
+}
+
+.brand-text {
+  margin-left: 10px;
+  font-size: 1.2rem;
+}
+
+#caduceus {
+  height: 30px;
+  padding: 4px;
+}
+
+.skeleton-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  border: 2px solid #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Links */
+.links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.value {
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.value:hover {
+  background-color: #21262c;
+}
+
+.value:active,
+.value:focus {
+  background-color: #11152b;
+  outline: none;
+}
+
+.value::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #2f81f7;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.value:focus::before,
+.value:active::before {
+  opacity: 1;
+}
+
+.link {
+  text-decoration: none;
+  font-weight: 500;
+  color: #dfdfe2;
+}
+
+.link:hover {
+  color: #3dc9ec;
+}
+
+@media (max-width: 768px) {
+  .navbar-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .links {
+    flex-direction: column;
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  .value {
+    width: 100%;
+  }
+}
+</style>
