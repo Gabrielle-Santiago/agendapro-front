@@ -1,9 +1,5 @@
 <script lang="ts" setup>
     import caduceus from '../assets/caduceus.png'
-    const links = [
-        {   text:"Contato", href:"#contact"},
-        {   text:"Test", href:"#contact"}
-    ]
 </script>
 
 <template>
@@ -19,8 +15,20 @@
         </div>
 
         <ul class="links">
-          <li class="value" v-for="link in links" :key="link.text">
-            <a class="link" :href="link.href">{{ link.text }}</a>
+          <li class="value">
+            <router-link to="/" class="link">Início</router-link>
+          </li>
+          <li class="value">
+            <router-link to="" class="link">Afiliar-se</router-link>
+          </li>
+          <li class="value">
+            <router-link to="/login" class="link">Login</router-link>
+          </li>
+          <li class="value">
+            <router-link to="/contact" class="link">Contato</router-link>
+          </li>
+          <li class="value">
+            <router-link to="" class="link">Cadastrar-se</router-link>
           </li>
         </ul>
       </div>
@@ -73,7 +81,6 @@
   justify-content: center;
 }
 
-/* Links */
 .links {
   display: flex;
   gap: 1rem;
@@ -122,6 +129,7 @@
 .link {
   text-decoration: none;
   font-weight: 500;
+  font-size: 20px;
   color: #dfdfe2;
 }
 
@@ -132,13 +140,12 @@
 @media (max-width: 768px) {
   .navbar-content {
     flex-direction: column;
-    align-items: flex-start;
   }
 
   .links {
-    flex-direction: column;
     width: 100%;
     padding-top: 10px;
+    font-size: 14px;
   }
 
   .value {

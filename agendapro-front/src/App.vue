@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import Home from './views/HomeView.vue';
 import TheHeader from './components/TheHeader.vue';
 </script>
 
 <template>
-  <TheHeader />
-  <HelloWorld msg="Sua saúde em Primeiro Lugar" />
+  <main>
+    <TheHeader />
+    <Home />
+    <router-view />
+  </main>
 </template>
-
-<style scoped>
-
-</style>
