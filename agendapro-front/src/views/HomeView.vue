@@ -89,7 +89,7 @@ import doctors from "../assets/doctors.jpg"
   </footer>
 </template>
 
-<style>
+<style scoped>
   .backgroundHome{
     position: relative;
     width: 100%;

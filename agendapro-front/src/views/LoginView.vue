@@ -21,7 +21,7 @@ import background_login from '../assets/background_login.jpg'
     </div>
 </template>
 
-<style>
+<style scoped>
     .gridLogin {
         display: grid;
         grid-template-columns: 1fr 1fr;
