@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import doctor from '../assets/doctor.jpg'
-import doctors from '../assets/doctors.jpg'
+import doctor from "../assets/doctor.jpg"
+import doctors from "../assets/doctors.jpg"
 </script>
 
 <template>

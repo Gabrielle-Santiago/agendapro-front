@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-    import caduceus from '../assets/caduceus.png'
+  import caduceus from "../assets/caduceus.png"
 </script>
 
 <template>
   <header class="header">
     <nav class="navbar">
       <div class="navbar-content">
-        
+
         <div class="logo">
           <div class="skeleton-avatar">
             <img id="caduceus" :src="caduceus" alt="Logo AgendaPro">
@@ -19,7 +19,7 @@
             <router-link to="/" class="link">Início</router-link>
           </li>
           <li class="value">
-            <router-link to="" class="link">Afiliar-se</router-link>
+            <router-link to="/formEmployee" class="link">Afiliar-se</router-link>
           </li>
           <li class="value">
             <router-link to="/login" class="link">Login</router-link>
@@ -28,7 +28,7 @@
             <router-link to="/contact" class="link">Contato</router-link>
           </li>
           <li class="value">
-            <router-link to="" class="link">Cadastrar-se</router-link>
+            <router-link to="/formPatient" class="link">Cadastrar-se</router-link>
           </li>
         </ul>
       </div>
