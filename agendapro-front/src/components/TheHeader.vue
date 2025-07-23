@@ -1,5 +1,23 @@
-<script lang="ts" setup>
-  import caduceus from "../assets/caduceus.png"
+<script setup lang="ts">
+  import { ref, watchEffect } from 'vue'; 
+  import caduceus from '../assets/caduceus.png'; 
+
+  const isLoggedIn = ref(false);
+
+  const loginStatus = () => {
+    const token = localStorage.getItem('jwt_token'); 
+    isLoggedIn.value = !!token; 
+  };
+
+  watchEffect(() => {
+    loginStatus();
+  });
+
+  const logout = () => {
+    localStorage.removeItem('jwt_token'); 
+    isLoggedIn.value = false;
+  };
+  
 </script>
 
 <template>
@@ -15,18 +33,35 @@
         </div>
 
         <ul class="links">
-          <li class="value">
-            <router-link to="/" class="link">Início</router-link>
-          </li>
-          <li class="value">
-            <router-link to="/formEmployee" class="link">Afiliar-se</router-link>
-          </li>
-          <li class="value">
-            <router-link to="/login" class="link">Login</router-link>
-          </li>
-          <li class="value">
-            <router-link to="/formPatient" class="link">Cadastrar-se</router-link>
-          </li>
+          <template v-if="isLoggedIn">
+            <li class="value">
+              <router-link to="/homePatient" class="link">Consulta</router-link>
+            </li>
+            <li class="value">
+              <router-link to="/newConsultation" class="link">Nova Consulta</router-link>
+            </li>
+            <li class="value">
+              <router-link to="/chatView" class="link">Comunidade</router-link>
+            </li>
+            <li class="value">
+              <router-link to="/" @click="logout" class="link">Sair</router-link>
+            </li>
+          </template>
+
+          <template v-else>
+            <li class="value">
+              <router-link to="/" class="link">Início</router-link>
+            </li>
+            <li class="value">
+              <router-link to="/formEmployee" class="link">Afiliar-se</router-link>
+            </li>
+            <li class="value">
+              <router-link to="/login" class="link">Login</router-link>
+            </li>
+            <li class="value">
+              <router-link to="/formPatient" class="link">Cadastrar-se</router-link>
+            </li>
+          </template>
         </ul>
       </div>
     </nav>

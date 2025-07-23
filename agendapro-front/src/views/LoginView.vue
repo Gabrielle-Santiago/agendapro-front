@@ -1,24 +1,62 @@
 <script setup lang="ts">
-import background_login from '../assets/background_login.jpg'
+    import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
+    import axios from 'axios';
+    import background_login from '../assets/background_login.jpg'
+     
+     interface LoginForm{
+        username: string,
+        passwd: string
+     }
+     
+     const username = ref<string>("");
+     const passwd = ref<string>("");
+
+     const router = useRouter();
+     const loginSubmit = async () => {
+        if (!username.value || !passwd.value ) {
+            return alert("Por favor, preencha todos os campos do formulário.");
+        }
+
+        const loginData: LoginForm = {
+            username: username.value,
+            passwd: passwd.value
+        }
+
+        try {
+            const response = await axios.post("http://localhost:8080/register/login", loginData);
+            alert("Login realizado com sucesso!")
+
+            if (response.data && response.data.token) {
+                localStorage.setItem('jwt_token', response.data.token);    
+            }
+            await router.push('/homeEmployee');
+
+        } catch (error) {
+            console.log(error)
+        }
+     }
 </script>
 
 <template>
-    <div class="gridLogin">
-        <div class="gridBackground">
-            <img :src="background_login" alt="background_login">
+    <form @submit.prevent="loginSubmit">
+        <div class="gridLogin">
+            <div class="gridBackground">
+                <img :src="background_login" alt="background_login">
+            </div>
+            <div class="gridLoginText">
+                <h1>Login</h1>
+
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" v-model="username" placeholder="Escreva seu username">
+
+                <label for="passwd">Senha</label>
+                <input type="password" name="passwd" id="passwd" v-model="passwd" placeholder="Escreva sua escreva">
+
+                <button type="submit">Logar</button>
+            </div>     
         </div>
-        <div class="gridLoginText">
-            <h1>Login</h1>
-
-            <label for="username">Username</label>
-            <input type="text" name="username" placeholder="Escreva seu username">
-
-            <label for="passwd">Senha</label>
-            <input type="text" name="passwd" placeholder="Escreva sua escreva">
-
-            <button @click="">Logar</button>
-        </div>     
-    </div>
+    </form>
 </template>
 
 <style scoped>

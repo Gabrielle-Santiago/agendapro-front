@@ -12,7 +12,7 @@ import doctors from "../assets/doctors.jpg"
       <h1 class="title">Sua saúde em primeiro lugar</h1>
       <ul class="links">
         <li>
-          <router-link to="" class="consult">marque sua consulta agora</router-link>
+          <router-link to="/login" class="consult">marque sua consulta agora</router-link>
         </li>
       </ul>
     </div>
@@ -31,7 +31,7 @@ import doctors from "../assets/doctors.jpg"
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse eaque architecto minus nesciunt quaerat natus, in cum porro eligendi a minima expedita voluptas sint nobis repellat id vero, atque saepe.
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit libero ipsam iure reiciendis natus! Quo sed cum alias nulla sapiente fuga esse ad aspernatur nisi adipisci! Dolorum eligendi necessitatibus quasi.
         </p>
-        <router-link id="linkDoctor" to="" class="link">Realizar Cadastro</router-link>
+        <router-link id="linkDoctor" to="/formEmployee" class="consult">Realizar Cadastro</router-link>
       </div>
     </div>
   </section>
@@ -65,8 +65,8 @@ import doctors from "../assets/doctors.jpg"
       </div>
       <div>
         <h3>Sobre</h3>
-        <router-link to="" class="footer-link">Cadastre-se como cliente</router-link>
-        <router-link to="" class="footer-link">Cadastre-se como funcionário</router-link>
+        <router-link to="/formPatient" class="footer-link">Cadastre-se como cliente</router-link>
+        <router-link to="/formEmployee" class="footer-link">Cadastre-se como funcionário</router-link>
       </div>
       <div>
         <h3>Créditos</h3>

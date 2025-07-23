@@ -1,14 +1,50 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import axios from 'axios';
+import { ref } from 'vue';
+
+    interface ConsulationForm{
+        //patientId: number,
+        title: string,
+        startConsultation: string,
+        endConsultation: string,
+        employeeId: string,
+    }
+
+    //const patientId = ref<number>();
+    const title = ref<string>("");
+    const startConsultation = ref<string>("");
+    const endConsultation = ref<string>("");
+    const employeeId = ref<string>("medico1");
+    const dateConsultation = ref<string>("");
+
+    const handleSubmit = async () => {
+        const ConsultationData: ConsulationForm = {
+            //patientId: patientId.value,
+            title: title.value,
+            startConsultation: startConsultation.value,
+            endConsultation: endConsultation.value,
+            employeeId: employeeId.value
+        }
+
+        try {
+            const response = await axios.post("http://localhost:8080/api/consultations/create", ConsultationData);
+            alert("Consulta agendada com sucesso!");
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+</script>
 
 <template>
   <div class="bodyConsultation">
     <h1 class="title">Agendar Consulta</h1>
-    <form action="" method="post" class="formConsultation">
-      <input type="text" class="inputConsultation" placeholder="Escreva um título">
+    <form @submit.prevent="handleSubmit" class="formConsultation">
+      <input id="title" type="text" class="inputConsultation" v-model="title" placeholder="Escreva um título">
       
-      <input type="time" class="inputConsultation" placeholder="Selecione um horário">
+      <input id="startConsultation" type="time" class="inputConsultation" v-model="startConsultation" placeholder="Selecione um horário">
       
-      <input type="date" class="inputConsultation" placeholder="Selecione uma data">
+      <input id="dateConsultation" type="date" class="inputConsultation" v-model="dateConsultation" placeholder="Selecione uma data">
 
       <label class="labelDescription" for="describe">Descrição (opcional)</label>
       <textarea class="textareaDescription" placeholder="Escreva quais sintomas você possui"></textarea>

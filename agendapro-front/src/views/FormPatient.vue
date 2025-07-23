@@ -1,37 +1,92 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+    import { ref } from "vue";
+    import axios from "axios";
+    import { useRouter } from 'vue-router';
+
+    interface PatientForm {
+        fullName: string;
+        email: string;
+        username: string;
+        passwd: string;
+        cpf: string;
+        dateBirth: string;
+        contact_number: string;
+        role: string;
+        describe: string;
+    }
+
+    const fullName = ref<string>("");
+    const email = ref<string>("");
+    const username = ref<string>("");
+    const passwd = ref<string>("");
+    const cpf = ref<string>("");
+    const dateBirth = ref<string>("");
+    const contact_number = ref<string>("");
+    const role = ref<string>("ROLE_PATIENT");
+    const describe = ref<string>("");
+
+    const router = useRouter();
+    const handleSubmit = async () => {
+        if (!fullName.value || !email.value || !username.value || !passwd.value ||
+        !cpf.value || !dateBirth.value || !contact_number.value) {
+            return alert("Por favor, preencha todos os campos do formulário.");
+        }
+
+        const formData: PatientForm = {
+            fullName: fullName.value,
+            email: email.value,
+            username: username.value,
+            passwd: passwd.value,
+            cpf: cpf.value,
+            dateBirth: dateBirth.value,
+            contact_number: contact_number.value,
+            role: role.value,
+            describe: describe.value
+        };
+
+        try {
+            const response = await axios.post("http://localhost:8080/register/patient", formData);
+            alert("Cadastro realizado com sucesso");
+            console.log(response.data);
+        } catch (error) {""
+            console.log(error);
+        }
+        await router.push('/login');
+    };
+</script>
 
 <template>
-    <form action="" method="post">
+    <form @submit.prevent="handleSubmit">
         <div class="formContainer">
             <h1 class="cadTitle">Cadastro</h1>
 
             <div class="formLeft">
                 <label class="formLabel" for="fullName">Nome Completo</label>
-                <input class="formInput" type="text" name="fullName" placeholder="Exemplo: João Gomes da Silva">
+                <input class="formInput" type="text" name="fullName" id="fullName" v-model="fullName" placeholder="Exemplo: João Gomes da Silva">
 
                 <label class="formLabel" for="email">Email</label>
-                <input class="formInput" type="email" name="email" placeholder="Exemplo: exemplo@gmail.com">
+                <input class="formInput" type="email" name="email" id="email" v-model="email" placeholder="Exemplo: exemplo@gmail.com">
 
                 <label class="formLabel" for="username">Username</label>
-                <input class="formInput" type="text" name="username" placeholder="Exemplo: Joao1mb">
+                <input class="formInput" type="text" name="username" id="username" v-model="username" placeholder="Exemplo: Joao1mb">
 
                 <label class="formLabel" for="passwd">Senha</label>
-                <input class="formInput" type="text" name="passwd" placeholder="Escreva sua senha">
+                <input class="formInput" type="password" name="passwd" id="passwd" v-model="passwd" placeholder="Escreva sua senha">
 
                 <label class="formLabel" for="cpf">CPF</label>
-                <input class="formInput" type="text" name="cpf" placeholder="Exemplo: 000.000.000-00">
+                <input class="formInput" type="text" name="cpf" id="cpf" v-model="cpf" placeholder="Exemplo: 000.000.000-00">
             </div>
 
             <div class="line"></div>
 
             <div class="formRight">
                 <label class="formLabel" for="dateBirth">Data de Nascimento</label>
-                <input class="formInput" type="date" name="dateBirth" placeholder="Exemplo: 30/06/1980">
+                <input class="formInput" type="date" name="dateBirth" id="dateBirth" v-model="dateBirth" placeholder="Exemplo: 30/06/1980">
 
                 <label class="formLabel" for="contact_number">Número de Contato</label>
-                <input class="formInput" type="text" name="contact_number" placeholder="Exemplo: (73) 98888-8888">
+                <input class="formInput" type="text" name="contact_number" id="contact_number" v-model="contact_number" placeholder="Exemplo: (73) 98888-8888">
 
-                <button @click="" class="buttonLogin">Cadastrar</button>
+                <button type="submit" class="buttonLogin">Cadastrar</button>
             </div>     
         </div>
     </form>
