@@ -47,11 +47,11 @@
         try {
             const response = await axios.post("http://localhost:8080/register/employee", formData);
             alert("Cadastro realizado com sucesso");
+            await router.push('/login');
             console.log(response.data);
         } catch (error) {
             console.log(error);
-        }
-        await router.push('/login');
+        }    
     };
 </script>
 

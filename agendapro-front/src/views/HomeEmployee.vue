@@ -8,7 +8,8 @@
         <div class="headers">
           <span class="headerPatient">Paciente</span>
           <span class="headerHour">Horário</span>
-          <span class="headerDate">Data</span>
+          <span class="headerDate">Data</span>       
+          <span class="headerDescribe">Descrição</span>
         </div>
 
         <div class="line"></div>
